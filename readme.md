@@ -35,4 +35,4 @@ prod server instances
 
 ## Table Relation
 
-[Table Relations]()
+[Table Relations](https://dbdiagram.io/d/profile-book-662a4b0c03593b6b61f4819f)
