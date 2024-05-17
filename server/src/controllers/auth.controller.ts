@@ -8,18 +8,26 @@ import verifyUser from '../utils/verifyUser';
 import { getUser } from '../utils/verifiedUser';
 import registerUser from '../utils/registerUser';
 import { validateEmail, validatePassword } from '../utils/validateEmail';
-import { JWT_SECRET, COOKIE_NAME, AGE_OF_COOKIE } from '../config/keys';
+import { JWT_SECRET, COOKIE_NAME, AGE_OF_COOKIE, ADMIN_PASSWORD } from '../config/keys';
+import { Role } from '@prisma/client';
 
 const ageOfCooke = AGE_OF_COOKIE as number;
 
 const authController = {
   signup: catchAsync(async (req: Request, res: Response) => {
-    const { email, password, fullName, role } = req.body;
+    const { email, password, fullName, role, adminPassword } = req.body;
     if (!email || !password) throw res.status(400).json('email and password required');
 
     // validate email and password
     validateEmail(email);
     validatePassword(password);
+
+    if (role) {
+      if (role !== Role.USER && role !== Role.ADMIN) throw new CustomError('Invalid role', 400);
+
+      const adminPasswordMatch = adminPassword === ADMIN_PASSWORD;
+      if (!adminPasswordMatch) throw new CustomError('Invalid admin password', 400);
+    }
 
     const user = await registerUser(email, password, fullName, role);
 
