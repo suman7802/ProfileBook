@@ -25,8 +25,10 @@ const authController = {
     if (role) {
       if (role !== Role.USER && role !== Role.ADMIN) throw new CustomError('Invalid role', 400);
 
-      const adminPasswordMatch = adminPassword === ADMIN_PASSWORD;
-      if (!adminPasswordMatch) throw new CustomError('Invalid admin password', 400);
+      if (role === Role.ADMIN) {
+        if (!adminPassword) throw new CustomError('admin password required', 400);
+        if (adminPassword !== ADMIN_PASSWORD) throw new CustomError('Invalid admin password', 400);
+      }
     }
 
     const user = await registerUser(email, password, fullName, role);
