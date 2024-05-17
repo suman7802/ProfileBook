@@ -24,7 +24,7 @@ const user = {
       },
     });
 
-    res.status(202).send(updateUser);
+    res.status(202).json(updateUser);
   }),
 
   deleteProfile: asyncCatch(async (req: Request, res: Response) => {
@@ -33,7 +33,7 @@ const user = {
     await prisma.user.delete({
       where: { id },
     });
-    res.status(204).send('Profile deleted successfully');
+    res.status(204).json('Profile deleted successfully');
   }),
 
   deleteProfileById: asyncCatch(async (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ const user = {
     await prisma.user.delete({
       where: { id },
     });
-    res.status(204).send('Profile deleted successfully');
+    res.status(204).json('Profile deleted successfully');
   }),
 
   profile: asyncCatch(async (req: Request, res: Response) => {
@@ -60,7 +60,7 @@ const user = {
       },
     });
 
-    res.status(200).send({ ...user });
+    res.status(200).json({ ...user });
   }),
 
   getUsers: asyncCatch(async (req: Request, res: Response) => {
@@ -68,7 +68,7 @@ const user = {
       skip: Number(req.params.index),
       take: 5,
     });
-    res.status(200).send(users);
+    res.status(200).json(users);
   }),
 };
 

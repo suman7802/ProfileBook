@@ -16,7 +16,7 @@ const ageOfCooke = AGE_OF_COOKIE as number;
 const authController = {
   signup: catchAsync(async (req: Request, res: Response) => {
     const { email, password, fullName, role, adminPassword } = req.body;
-    if (!email || !password) throw res.status(400).json('email and password required');
+    if (!email || !password) throw new CustomError('email and password required', 400);
 
     // validate email and password
     validateEmail(email);
