@@ -31,7 +31,7 @@ prod server instances
 
 ## Usage
 
-[Postman Documentation]()
+[Postman Documentation](https://documenter.getpostman.com/view/27265804/2sA3JT3doh)
 
 ## Table Relation
 
