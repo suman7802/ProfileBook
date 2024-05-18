@@ -24,7 +24,7 @@ export default function Login() {
   const togglePasswordVisibility = () => setShowPassword((show) => !show);
 
   function onSubmit(values) {
-    console.log(values);
+    // Todo: Implement login logic
   }
 
   return (

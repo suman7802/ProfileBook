@@ -48,6 +48,8 @@ const authController = {
     const user = await getUser(email);
     if (!user) return next(new CustomError(`User Not Found`, 404));
 
+    if (user.verified) return next(new CustomError('User already verified', 400));
+
     if (user.otpExpiry < new Date())
       return next(new CustomError('OTP Expired! Please sign-up again', 403));
 
@@ -56,7 +58,9 @@ const authController = {
 
     await verifyUser(email);
 
-    res.status(200).json('User Verified');
+    res.status(200).json({
+      message: 'User verified successfully',
+    });
   }),
 
   login: catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -109,6 +113,7 @@ const authController = {
       .json({
         user: sanitizedUser,
         token,
+        message: 'User logged in successfully',
       });
   }),
 };

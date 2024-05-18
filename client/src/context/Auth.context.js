@@ -2,11 +2,12 @@ import axios from 'axios';
 import url from '../config';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { createContext, useReducer } from 'react';
 
 const AuthContext = createContext();
+
 const api = axios.create({
   baseURL: `${url}/auth`,
   headers: { 'Content-Type': 'application/json' },
@@ -31,7 +32,7 @@ function reducer(state, action) {
 
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const signUp = async (email, password, fullName, role, adminPassword) => {
     dispatch({ type: 'SET_LOADING', payload: true });
@@ -51,7 +52,7 @@ function AuthProvider({ children }) {
 
       if (response.status === 201) {
         toast.success(response.data.message);
-        // navigate('/auth/verify');
+        navigate('/auth/verify');
       }
     } catch (error) {
       console.error(error);
@@ -63,16 +64,14 @@ function AuthProvider({ children }) {
 
   const verify = async (otp, email = state.email) => {
     dispatch({ type: 'SET_LOADING', payload: true });
+    console.log('verifying', otp, email);
 
     try {
-      const response = await api.put('/verify', {
-        email,
-        otp,
-      });
+      const response = await api.put('/verify', { otp, email });
 
       if (response.status === 200) {
-        toast.success('Verification successful. Please login.');
-        // navigate('/auth/login');
+        toast.success(response.data.message);
+        navigate('/auth/login');
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -92,7 +91,7 @@ function AuthProvider({ children }) {
 
       dispatch({ type: 'LOGIN', payload: response.data });
       toast.success('Login successful.');
-      // navigate('/');
+      navigate('/');
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

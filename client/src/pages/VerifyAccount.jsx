@@ -2,25 +2,27 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
+
 const formSchema = z.object({
   email: z
     .string()
     .nonempty({ message: 'Please provide email' })
     .email({ message: 'Invalid email address.' }),
 
-  otp: z
-    .string()
-    .length(5, { message: 'OTP must be 6 digits.' })
-    .regex(/^\d+$/, { message: 'OTP must only contain digits.' }),
+  otp: z.string().length(5, { message: 'OTP must be 6 digits.' }),
 });
 
 export default function VerifyAccount() {
+  const { loading, verify } = useContext(AuthContext);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
 
   function onSubmit(values) {
-    console.log(values);
+    verify(values.otp, values.email);
   }
 
   return (
@@ -35,9 +37,10 @@ export default function VerifyAccount() {
           <label>
             <span className="ml-1">Email</span>
             <input
+              type="email"
               {...form.register('email')}
-              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
               placeholder="john.doe@example.com"
+              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
             />
             {form.formState.errors.email && (
               <p className="text-red-500">{form.formState.errors.email.message}</p>
@@ -47,9 +50,9 @@ export default function VerifyAccount() {
           <label>
             <span className="ml-1">OTP</span>
             <input
+              placeholder="*****"
               {...form.register('otp')}
               className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
-              placeholder="123456"
             />
             {form.formState.errors.otp && (
               <p className="text-red-500">{form.formState.errors.otp.message}</p>
@@ -60,7 +63,7 @@ export default function VerifyAccount() {
           type="submit"
           className="w-full py-2 px-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
-          Verify
+          Verify{loading && 'ing'}
         </button>
       </form>
     </div>

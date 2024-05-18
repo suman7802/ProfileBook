@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { useContext } from 'react';
-import { AuthContext } from '../context/Auth.context';
+import { AuthContext } from '../context/auth.context';
 
 const formSchema = z.object({
   fullName: z.string().regex(/^[a-zA-Z]+\s[a-zA-Z]+$/, {
@@ -43,9 +43,7 @@ const formSchema = z.object({
 export default function SignUp() {
   const { loading, signUp } = useContext(AuthContext);
 
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-  });
+  const form = useForm({ resolver: zodResolver(formSchema) });
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((show) => !show);

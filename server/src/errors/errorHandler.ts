@@ -6,6 +6,6 @@ interface Error {
 }
 
 export default function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
-  console.error(err);
+  console.error(err.message, err.status);
   res.status(err.status || 500).json({ message: err.message || 'An unexpected error occurred' });
 }

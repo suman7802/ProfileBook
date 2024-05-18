@@ -1,14 +1,17 @@
-import LogIn from './pages/LogIn';
-import SignUp from './pages/SingUp';
-import VerifyAccount from './pages/VerifyAccount';
-import { AuthProvider } from './context/Auth.context';
+import Auth from './pages/Auth';
+import { AuthProvider } from './context/auth.context';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function App() {
   return (
-    <AuthProvider>
-      <div className="App">
-        <SignUp />
-      </div>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <div className="App">
+          <Routes>
+            <Route path="/auth/*" element={<Auth />} />
+          </Routes>
+        </div>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
