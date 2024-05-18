@@ -4,7 +4,11 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Blog() {
-  const { isAuthenticated, loading } = useContext(ProfileContext);
+  const context = useContext(ProfileContext);
+
+  if (context === undefined) throw new Error('useProfile must be used within a ProfileProvider');
+
+  const { isAuthenticated, loading } = context;
 
   return (
     <div className="flex flex-col py-7 items-center">
@@ -17,7 +21,7 @@ export default function Blog() {
       </h1>
       <p className="text-center p-5">Don't Forget To Store Your Profile</p>
 
-      <button className='bg-indigo-600 hover:bg-indigo-700 px-8 py-3 text-white rounded-md'>
+      <button className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 text-white rounded-md">
         {!loading && isAuthenticated ? (
           <Link to="/profile">Profile</Link>
         ) : (

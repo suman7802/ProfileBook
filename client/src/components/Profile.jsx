@@ -6,8 +6,11 @@ import { ProfileContext } from '../context/profile.context';
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const { bio, role, email, profile, fullName, loading } = useContext(ProfileContext);
+  const context = useContext(ProfileContext);
 
+  if (context === undefined) throw new Error('useProfile must be used within a ProfileProvider');
+
+  const { bio, role, email, profile, fullName, loading } = context;
   const togglePOPUP = () => {
     setIsEditing((isEditing) => !isEditing);
   };

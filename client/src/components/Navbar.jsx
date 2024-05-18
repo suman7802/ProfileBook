@@ -6,7 +6,11 @@ import { ProfileContext } from '../context/profile.context';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, loading } = useContext(ProfileContext);
+  const context = useContext(ProfileContext);
+
+  if (context === undefined) throw new Error('useProfile must be used within a ProfileProvider');
+
+  const { isAuthenticated, loading } = context;
 
   return (
     <nav className="bg-gray-200 fixed z-50 w-screen px-6 py-4 shadow">
@@ -37,7 +41,7 @@ export default function Navbar() {
               Profile
             </Link>
           )}
-          
+
           {!loading && isAuthenticated && (
             <Link
               to="/account"

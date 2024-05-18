@@ -41,7 +41,11 @@ const formSchema = z.object({
 });
 
 export default function SignUp() {
-  const { loading, signUp } = useContext(AuthContext);
+  const context = useContext(AuthContext);
+
+  if (context === undefined) throw new Error('useAuth must be used within a AuthProvider');
+
+  const { loading, signUp } = context;
 
   const form = useForm({ resolver: zodResolver(formSchema) });
 
