@@ -12,7 +12,7 @@ const user = {
 
     const { fullName, bio } = req.body;
 
-    let profileUrl = null;
+    let profileUrl;
     if (req.file) profileUrl = await uploadPhoto(req.file);
 
     const updateUser = await prisma.user.update({
