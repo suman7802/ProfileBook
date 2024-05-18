@@ -3,8 +3,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 
 const formSchema = z.object({
   email: z
@@ -16,15 +19,18 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+  const { loading, logIn, email } = useContext(AuthContext);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
+    defaultValues: { email },
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((show) => !show);
 
   function onSubmit(values) {
-    // Todo: Implement login logic
+    logIn(values.email, values.password);
   }
 
   return (
@@ -81,7 +87,7 @@ export default function Login() {
           type="submit"
           className="w-full py-2 px-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
-          Login
+          Login{loading && 'ing'}
         </button>
       </form>
     </div>

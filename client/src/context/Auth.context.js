@@ -89,9 +89,10 @@ function AuthProvider({ children }) {
         password,
       });
 
-      dispatch({ type: 'LOGIN', payload: response.data });
-      toast.success('Login successful.');
-      navigate('/');
+      if (response.status === 200) {
+        toast.success(response.data.message);
+        navigate('/');
+      }
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

@@ -15,10 +15,11 @@ const formSchema = z.object({
 });
 
 export default function VerifyAccount() {
-  const { loading, verify } = useContext(AuthContext);
+  const { loading, verify, email } = useContext(AuthContext);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
+    defaultValues: { email },
   });
 
   function onSubmit(values) {
