@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useContext } from 'react';
+
 import { ProfileContext } from '../context/profile.context';
 
 export default function UpdateProfile({ fullName, bio, togglePOPUP }) {

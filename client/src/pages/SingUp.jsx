@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
 const formSchema = z.object({
@@ -168,6 +168,9 @@ export default function SignUp() {
         >
           Submit{loading && 'ting...'}
         </button>
+        <Link to="/auth/login" className="text-indigo-600 text-sm pl-1 hover:underline">
+          Already have an account? Login
+        </Link>
       </form>
     </div>
   );

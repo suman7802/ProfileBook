@@ -1,5 +1,3 @@
-import aboutAnimation from '../assets/about.svg';
-import SocialButton from '../components/SocialButton';
 import {
   faFacebookF,
   faInstagram,
@@ -7,6 +5,9 @@ import {
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
+import aboutAnimation from '../assets/about.svg';
+import SocialButton from '../components/SocialButton';
 
 const socialButtons = [
   {

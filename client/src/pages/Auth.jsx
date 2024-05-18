@@ -1,7 +1,8 @@
+import { Routes, Route } from 'react-router-dom';
+
 import Login from './LogIn';
 import SignUp from './SingUp';
 import VerifyAccount from './VerifyAccount';
-import { Routes, Route } from 'react-router-dom';
 
 export default function Auth() {
   return (

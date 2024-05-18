@@ -1,8 +1,8 @@
 import { z } from 'zod';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
 const formSchema = z.object({

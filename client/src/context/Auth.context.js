@@ -1,10 +1,10 @@
 import axios from 'axios';
-import {url} from '../config';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
 import { createContext, useReducer } from 'react';
+
+import { url } from '../config';
 
 const AuthContext = createContext();
 
@@ -40,10 +40,10 @@ function AuthProvider({ children }) {
 
     try {
       const requestBody = {
+        role,
         email,
         password,
         fullName,
-        role,
       };
 
       if (role === 'ADMIN') requestBody.adminPassword = adminPassword;
@@ -64,7 +64,6 @@ function AuthProvider({ children }) {
 
   const verify = async (otp, email = state.email) => {
     dispatch({ type: 'SET_LOADING', payload: true });
-    console.log('verifying', otp, email);
 
     try {
       const response = await api.put('/verify', { otp, email });

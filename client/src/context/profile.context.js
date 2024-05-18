@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { url } from '../config';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { createContext, useReducer, useEffect } from 'react';
+
+import { url } from '../config';
 
 const ProfileContext = createContext();
 

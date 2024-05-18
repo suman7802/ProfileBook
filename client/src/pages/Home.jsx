@@ -1,7 +1,8 @@
-import HeroAnimation from '../assets/hero.svg';
-import { ProfileContext } from '../context/profile.context';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import HeroAnimation from '../assets/hero.svg';
+import { ProfileContext } from '../context/profile.context';
 
 export default function Blog() {
   const context = useContext(ProfileContext);
@@ -12,8 +13,6 @@ export default function Blog() {
 
   return (
     <div className="flex flex-col py-7 items-center">
-      {/* hero section */}
-
       <img src={HeroAnimation} alt="hero" className="h-[50vh]" />
       <h1 className="text-4xl mt-5 font-semibold text-center leading-relaxed">
         <span className="md:inline block">SYNC with&nbsp;</span>
