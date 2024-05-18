@@ -43,7 +43,7 @@ export default function SignUp() {
             <span className="ml-1 mb-3">Full Name</span>
             <input
               {...form.register('fullName')}
-              className="w-full rounded-md px-2 py-2 mt-2"
+              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
               placeholder="John Doe"
             />
             {form.formState.errors.fullName && (
@@ -55,7 +55,7 @@ export default function SignUp() {
             <span className="ml-1">Email</span>
             <input
               {...form.register('email')}
-              className="w-full rounded-md px-2 py-2 mt-2"
+              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
               placeholder="john.doe@example.com"
             />
             {form.formState.errors.email && (
@@ -68,7 +68,7 @@ export default function SignUp() {
             <input
               {...form.register('password')}
               type="password"
-              className="w-full rounded-md px-2 py-2 mt-2"
+              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
               placeholder="********"
             />
             {form.formState.errors.password && (
@@ -78,7 +78,10 @@ export default function SignUp() {
 
           <label>
             <span className="ml-1">Role</span>
-            <select {...form.register('role')} className="w-full rounded-md px-2 py-2 mt-2">
+            <select
+              {...form.register('role')}
+              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+            >
               <option value="USER">User</option>
               <option value="ADMIN">Admin</option>
             </select>
@@ -90,7 +93,7 @@ export default function SignUp() {
               <input
                 {...form.register('adminPassword')}
                 type="password"
-                className="w-full rounded-md px-2 py-2 mt-2"
+                className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
                 placeholder="********"
                 s
               />
@@ -102,7 +105,7 @@ export default function SignUp() {
         </div>
         <button
           type="submit"
-          className="w-full py-2 px-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700   "
+          className="w-full py-2 px-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
           Submit
         </button>
