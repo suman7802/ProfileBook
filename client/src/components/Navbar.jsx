@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-200 px-6 py-4 shadow">
+    <nav className="bg-gray-200 fixed w-screen px-6 py-4 shadow">
       <div className="flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
         <div className="flex justify-between items-center">
           <div>
