@@ -1,5 +1,5 @@
 import axios from 'axios';
-import url from '../config';
+import {url} from '../config';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';

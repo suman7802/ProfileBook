@@ -1,3 +1,4 @@
 const url = 'http://localhost:8000/api';
+const cookieName = 'profileBook';
 
-export default url;
+export { url, cookieName };

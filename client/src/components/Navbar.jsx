@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { ProfileContext } from '../context/profile.context';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, loading } = useContext(ProfileContext);
 
   return (
-    <nav className="bg-gray-200 fixed w-screen px-6 py-4 shadow">
+    <nav className="bg-gray-200 fixed z-50 w-screen px-6 py-4 shadow">
       <div className="flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
         <div className="flex justify-between items-center">
           <div>
@@ -27,23 +29,29 @@ export default function Navbar() {
         </div>
 
         <div className={`md:flex ${isOpen ? '' : 'hidden'} `}>
-          <Link
-            to="/"
-            className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
-          >
-            Home
-          </Link>
+          {!loading && isAuthenticated && (
+            <Link
+              to="/profile"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
+            >
+              Profile
+            </Link>
+          )}
+          
+          {!loading && isAuthenticated && (
+            <Link
+              to="/account"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
+            >
+              Account
+            </Link>
+          )}
+
           <Link
             to="/about"
             className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
           >
             About
-          </Link>
-          <Link
-            to="/contact"
-            className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
-          >
-            Contact
           </Link>
         </div>
       </div>
