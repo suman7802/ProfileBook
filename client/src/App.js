@@ -1,7 +1,8 @@
 import Auth from './pages/Auth';
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
 import { AuthProvider } from './context/auth.context';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
 
 export default function App() {
   return (
@@ -9,9 +10,12 @@ export default function App() {
       <AuthProvider>
         <div className="App">
           <Navbar />
-          <Routes>
-            <Route path="/auth/*" element={<Auth />} />
-          </Routes>
+          <div className="pt-20">
+            <Routes>
+              <Route path="/*" index element={<Home />} />
+              <Route path="/auth/*" element={<Auth />} />
+            </Routes>
+          </div>
         </div>
       </AuthProvider>
     </BrowserRouter>
