@@ -1,9 +1,11 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { createContext, useReducer, useEffect } from 'react';
 
 import { url } from '../config';
+import { AuthContext } from '../context/auth.context';
 
 const ProfileContext = createContext();
 
@@ -49,6 +51,11 @@ function reducer(state, action) {
 
 function ProfileProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const authContext = useContext(AuthContext);
+
+  if (authContext === undefined) throw new Error('useAuth must be used within a AuthProvider');
+
+  const { logout } = authContext;
 
   useEffect(() => {
     async function getProfile() {
@@ -80,7 +87,6 @@ function ProfileProvider({ children }) {
 
       if (response.status === 202) {
         window.location.reload();
-        toast.success(response.data.message);
       }
     } catch (error) {
       console.error(error);
@@ -97,7 +103,9 @@ function ProfileProvider({ children }) {
       const response = await api.delete('/delete');
 
       if (response.status === 204) {
+        window.location.reload();
         dispatch({ type: 'DELETE_PROFILE' });
+        logout();
         toast.success(response.data.message);
       }
     } catch (error) {

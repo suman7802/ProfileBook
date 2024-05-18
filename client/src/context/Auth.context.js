@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { createContext, useReducer } from 'react';
 
-import { url } from '../config';
+import { url, cookieName } from '../config';
 
 const AuthContext = createContext();
 
@@ -89,8 +89,8 @@ function AuthProvider({ children }) {
       });
 
       if (response.status === 200) {
-        toast.success(response.data.message);
         navigate('/');
+        window.location.reload();
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -100,10 +100,9 @@ function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    // Todo:remove cookie
-
-    toast.success('Logout successful.');
-    // navigate('/auth/login');
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:01 UTC; path=/`;
+    navigate('/');
+    window.location.reload();
   };
 
   return (

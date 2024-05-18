@@ -20,13 +20,19 @@ export default function Blog() {
       </h1>
       <p className="text-center p-5">Don't Forget To Store Your Profile</p>
 
-      <button className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 text-white rounded-md">
-        {!loading && isAuthenticated ? (
-          <Link to="/profile">Profile</Link>
-        ) : (
-          <Link to="/auth/login">Login</Link>
-        )}
-      </button>
+      {!loading && isAuthenticated ? (
+        <Link to="/profile">
+          <button className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 text-white rounded-md">
+            Profile
+          </button>
+        </Link>
+      ) : (
+        <Link to="/auth/login">
+          <button className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 text-white rounded-md">
+            Login
+          </button>
+        </Link>
+      )}
     </div>
   );
 }
