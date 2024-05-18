@@ -1,6 +1,10 @@
 import { z } from 'zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const formSchema = z.object({
   fullName: z.string().regex(/^[a-zA-Z]+\s[a-zA-Z]+$/, {
@@ -26,6 +30,12 @@ export default function SignUp() {
     defaultValues: { role: 'USER' },
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword((show) => !show);
+
+  const [showAdminPassword, setShowAdminPassword] = useState(false);
+  const toggleAdminPasswordVisibility = () => setShowAdminPassword((show) => !show);
+
   function onSubmit(values) {
     console.log(values);
   }
@@ -36,7 +46,7 @@ export default function SignUp() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col bg-gray-200 rounded-lg p-10 gap-5"
       >
-        <h2 className="text-2xl font-bold text-gray-600">Sign Up</h2>
+        <h2 className="text-2xl font-bold text-indigo-600">Sign Up</h2>
 
         <div className="flex flex-col gap-3 text-gray-500">
           <label>
@@ -65,12 +75,28 @@ export default function SignUp() {
 
           <label>
             <span className="ml-1">Password</span>
-            <input
-              {...form.register('password')}
-              type="password"
-              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
-              placeholder="********"
-            />
+
+            <div className="password relative">
+              <input
+                {...form.register('password')}
+                type={showPassword ? 'text' : 'password'}
+                className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+                placeholder="********"
+              />
+
+              <button
+                type="button"
+                className="absolute right-3 top-[30%]"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                ) : (
+                  <FontAwesomeIcon icon={faEye} />
+                )}
+              </button>
+            </div>
+
             {form.formState.errors.password && (
               <p className="text-red-500">{form.formState.errors.password.message}</p>
             )}
@@ -90,13 +116,27 @@ export default function SignUp() {
           {form.watch('role') === 'ADMIN' && (
             <label>
               <span className="ml-1">Admin Password</span>
-              <input
-                {...form.register('adminPassword')}
-                type="password"
-                className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
-                placeholder="********"
-                s
-              />
+              <div className="password relative">
+                <input
+                  {...form.register('adminPassword')}
+                  type={showAdminPassword ? 'text' : 'password'}
+                  className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+                  placeholder="********"
+                  s
+                />
+
+                <button
+                  type="button"
+                  className="absolute right-3 top-[30%]"
+                  onClick={toggleAdminPasswordVisibility}
+                >
+                  {showAdminPassword ? (
+                    <FontAwesomeIcon icon={faEyeSlash} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEye} />
+                  )}
+                </button>
+              </div>
               {form.formState.errors.adminPassword && (
                 <p className="text-red-500">{form.formState.errors.adminPassword.message}</p>
               )}
