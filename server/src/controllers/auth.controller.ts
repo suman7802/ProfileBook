@@ -33,7 +33,10 @@ const authController = {
 
     const user = await registerUser(email, password, fullName, role);
 
-    res.status(201).json(user);
+    res.status(201).json({
+      user,
+      message: 'User created successfully',
+    });
   }),
 
   verify: catchAsync(async (req: Request, res: Response, next: NextFunction) => {

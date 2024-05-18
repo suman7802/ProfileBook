@@ -1,11 +1,14 @@
-import LogIn from './components/LogIn';
-import SignUp from './components/SingUp';
+import LogIn from './pages/LogIn';
+import SignUp from './pages/SingUp';
+import VerifyAccount from './pages/VerifyAccount';
+import { AuthProvider } from './context/Auth.context';
 
 export default function App() {
   return (
-    <div className="App">
-      <SignUp />
-      <LogIn />
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <SignUp />
+      </div>
+    </AuthProvider>
   );
 }

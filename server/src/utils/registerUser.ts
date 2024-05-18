@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
 import sendOTP from './sendOTP';
 import generateOTP from './generateOTP';
-import { PrismaClient, Role } from '@prisma/client';
 import { verifiedUser } from './verifiedUser';
+import CustomError from '../errors/customError';
+import { PrismaClient, Role } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -14,7 +15,7 @@ export default async function registerUser(
 ) {
   const user = await verifiedUser(email);
 
-  if (user) throw new Error('User already exists');
+  if (user) throw new CustomError('User already exists', 400);
 
   // if user is new or not verified
   const { hashedOTP, OTP } = await generateOTP();

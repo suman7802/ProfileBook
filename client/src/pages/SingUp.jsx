@@ -3,8 +3,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
+import { useContext } from 'react';
+import { AuthContext } from '../context/Auth.context';
 
 const formSchema = z.object({
   fullName: z.string().regex(/^[a-zA-Z]+\s[a-zA-Z]+$/, {
@@ -21,13 +24,27 @@ const formSchema = z.object({
     .min(8, { message: 'Password must be at least 8 characters.' })
     .regex(/\d/, { message: 'Password must contain at least one digit.' }),
 
-  adminPassword: z.string().nonempty({ message: 'Please provide admin password' }),
+  role: z.enum(['USER', 'ADMIN']).default('USER'),
+
+  adminPassword: z
+    .string()
+    .optional()
+    .refine(
+      (adminPassword, parent) => {
+        const role = parent?.role ?? 'USER';
+        return role !== 'ADMIN' || adminPassword.trim() !== '';
+      },
+      {
+        message: 'Please provide admin password',
+      }
+    ),
 });
 
 export default function SignUp() {
+  const { loading, signUp } = useContext(AuthContext);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: { role: 'USER' },
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +54,7 @@ export default function SignUp() {
   const toggleAdminPasswordVisibility = () => setShowAdminPassword((show) => !show);
 
   function onSubmit(values) {
-    console.log(values);
+    signUp(values.email, values.password, values.fullName, values.role, values.adminPassword);
   }
 
   return (
@@ -75,7 +92,6 @@ export default function SignUp() {
 
           <label>
             <span className="ml-1">Password</span>
-
             <div className="password relative">
               <input
                 {...form.register('password')}
@@ -106,6 +122,8 @@ export default function SignUp() {
             <span className="ml-1">Role</span>
             <select
               {...form.register('role')}
+              onChange={(e) => form.setValue('role', e.target.value)}
+              value={form.watch('role')}
               className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
             >
               <option value="USER">User</option>
@@ -122,7 +140,6 @@ export default function SignUp() {
                   type={showAdminPassword ? 'text' : 'password'}
                   className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
                   placeholder="********"
-                  s
                 />
 
                 <button
@@ -147,7 +164,7 @@ export default function SignUp() {
           type="submit"
           className="w-full py-2 px-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
-          Submit
+          Submit{loading && 'ting...'}
         </button>
       </form>
     </div>
