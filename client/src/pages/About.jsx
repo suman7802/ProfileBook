@@ -42,7 +42,7 @@ export default function About() {
           <span className="font-semibold">Suman Sharma</span>.
         </span>
         <span>
-          I am a<span className="font-semibold text-indigo-500">&nbsp;web developer&nbsp;</span>&
+          A<span className="font-semibold text-indigo-500">&nbsp;web developer&nbsp;</span>&
           <span className="font-semibold text-indigo-500">&nbsp;CS student&nbsp;</span>
         </span>
         <span>

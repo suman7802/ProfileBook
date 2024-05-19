@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Profile from './components/Profile';
 import About from './pages/About';
 import Account from './pages/Account';
+import Status from './components/Status';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <ProfileProvider>
           <div className="App">
             <Navbar />
+            <Status />
             <div className="pt-16">
               <Routes>
                 <Route path="/*" index element={<Home />} />

@@ -48,8 +48,7 @@ const authController = {
     const user = await getUser(email);
     if (!user) return next(new CustomError(`User Not Found`, 404));
 
-    // Todo : uncomment this line
-    // if (user.verified) return next(new CustomError('User already verified', 400));
+    if (user.verified) return next(new CustomError('User already verified', 400));
 
     if (user.otpExpiry < new Date())
       return next(new CustomError('OTP Expired! Please sign-up again', 403));

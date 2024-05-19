@@ -18,7 +18,7 @@ export default function Blog() {
         <span className="md:inline block">SYNC with&nbsp;</span>
         <span className="text-indigo-600 md:inline block">Profile Book</span>
       </h1>
-      <p className="text-center p-5">Don't Forget To Store Your Profile</p>
+      <p className="text-center p-5">Let's get started with Profile Book</p>
 
       {!loading && isAuthenticated ? (
         <Link to="/profile">
