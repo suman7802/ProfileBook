@@ -6,6 +6,7 @@ import { createContext, useReducer, useEffect } from 'react';
 import { ProfileContext } from '../context/profile.context';
 
 import { url } from '../config';
+import { get } from 'react-hook-form';
 
 const UsersContext = createContext();
 
@@ -48,7 +49,7 @@ function UsersProvider({ children }) {
 
   useEffect(() => {
     if (role === 'ADMIN') {
-      async function getUsers() {
+      const getUsers = async () => {
         dispatch({ type: 'SET_LOADING', payload: true });
         try {
           const response = await api.get(`/profiles/${index}`);
@@ -62,8 +63,7 @@ function UsersProvider({ children }) {
         } finally {
           dispatch({ type: 'SET_LOADING', payload: false });
         }
-      }
-
+      };
       getUsers();
     }
   }, [role, index]);

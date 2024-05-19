@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import Profile from '../components/Profile';
 import ListUsers from '../components/ListUsers';
 import { ProfileContext } from '../context/profile.context';
-import { UsersProvider } from '../context/users.context';
 
 export default function UserProfile() {
   const context = useContext(ProfileContext);
@@ -15,7 +14,7 @@ export default function UserProfile() {
     <>
       <div className="flex flex-col items-center min-h-screen">
         <Profile />
-        <UsersProvider>{role === 'ADMIN' && <ListUsers />}</UsersProvider>
+        {role === 'ADMIN' && <ListUsers />}
       </div>
     </>
   );
