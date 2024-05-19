@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Store your profile and retrieve it whenever you want. Profile Book offers a seamless experience for managing and accessing user profiles. with a user-friendly interface and secure authentication, Profile Book is the perfect solution for managing your profile. like a pro, ` link: [Profile Book](https://profilebook.onrender.com)
+Store your profile and retrieve it whenever you want. Profile Book offers a seamless experience for managing and accessing user profiles. with a user-friendly interface and secure authentication, Profile Book is the perfect solution for managing your profile. like a pro, link: [Profile Book](https://profilebook.onrender.com)
 
 ## Features
 
