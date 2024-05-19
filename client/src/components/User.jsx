@@ -57,7 +57,7 @@ export default function User({ user }) {
                   onClick={() => setShow(!show)}
                   className="text-sm text-indigo-500 hover:cursor-pointer hover:underline"
                 >
-                  more
+                  {show ? 'less' : 'more'}
                 </p>
               </div>
             </div>

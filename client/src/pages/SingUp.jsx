@@ -10,9 +10,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../context/auth.context';
 
 const formSchema = z.object({
-  fullName: z.string().regex(/^[a-zA-Z]+\s[a-zA-Z]+$/, {
-    message: 'Please provide your full name.',
-  }),
+  fullName: z.string().nonempty({ message: 'Please provide full name' }),
 
   email: z
     .string()
