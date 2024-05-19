@@ -37,7 +37,8 @@ export default function User({ user }) {
           onCancel={() => setShowConfirm(false)}
         />
       )}
-      <div className="user flex flex-col items-center  bg-[#ececece0] my-1 px-5 py-3 rounded-md w-full">
+
+      <div className="user flex flex-col items-center  bg-[#ececece0] my-1 px-2 sm:px-5 py-3 rounded-md w-full md:w-[50vw] lg:w-[35vw] xl:w-[25vw] 2xl:w-[15vw]">
         <div className="flex flex-row justify-between items-center w-full">
           <img
             src={user.profile}
@@ -72,6 +73,7 @@ export default function User({ user }) {
             </span>
           )}
         </div>
+
         {show && (
           <div className="bio">
             <p>{user.bio}</p>

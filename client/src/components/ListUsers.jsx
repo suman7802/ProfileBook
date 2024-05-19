@@ -10,8 +10,8 @@ export default function ListUsers() {
   const { users, loading, loadMoreUsers } = context;
 
   return (
-    <div className="w-screen flex flex-col items-center px-10">
-      <hr className="border w-full" />
+    <div className="w-screen flex flex-col items-center sm:px-10">
+      <hr className="border w-full md:w-[60vw] lg:w-[40vw] xl:w-[29vw] 2xl:w-[18vw]" />
 
       {users.map((user) => (
         <User key={user.id} user={user} />
