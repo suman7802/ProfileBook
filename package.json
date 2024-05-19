@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "client": "cd client && npm install && npm run build",
-    "server": "cd server && npm install && tsc ",
-    "install": "npm run client && npm run server",
-    "dev": "npm run install && cd server && npm run dev",
-    "start": "cd server && node dist/index.js"
+    "server": "cd server && npm install && npm run dev",
+    "dev": "npm run client && npm run server"
   },
   "author": "suman sharma",
   "license": "ISC"
