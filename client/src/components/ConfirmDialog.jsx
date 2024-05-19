@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export default function ConfirmDialog({ message, confirmColor, onConfirm, onCancel }) {
   return (
-    <div className="absolute w-80 top-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-[#e4e7ebe4] border border-gray-300 rounded-md">
+    <div className="fixed w-80 top-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-[#e4e7ebe4] border border-gray-300 rounded-md">
       <div className="m-10 flex flex-col gap-4 items-center">
         <p>{message}</p>
         <div className="flex justify-end gap-4">
