@@ -27,7 +27,7 @@ dev server instances
 [server side](http://localhost:8000)
 
 prod server instances
-[click here](https://profilebook.onrender.com/profile)
+[click here](https://profilebook.onrender.com)
 
 ## Usage
 
