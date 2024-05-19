@@ -51,7 +51,7 @@ To install the project, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/profile-book.git
+   git clone https://github.com/suman7802/ProfileBook
    ```
 
 2. **Create .env files:**
