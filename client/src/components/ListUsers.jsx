@@ -20,7 +20,7 @@ export default function ListUsers() {
       <button
         type="button"
         onClick={loadMoreUsers}
-        className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-5 w-40 hover:bg-blue-700"
+        className="bg-indigo-500 text-white font-bold py-2 px-4 rounded mt-5 w-40 hover:bg-indigo-700"
       >
         {loading ? 'Loading..' : 'Load more'}
       </button>

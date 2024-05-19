@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ProfileContext } from '../context/profile.context';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
   const context = useContext(ProfileContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   if (context === undefined) throw new Error('useProfile must be used within a ProfileProvider');
 
@@ -25,7 +27,7 @@ export default function Navbar() {
           <div>
             <button
               type="button"
-              className="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"
+              className="block text-gray-800 font-semibold hover:text-indigo-700 focus:text-gray-600 focus:outline-none md:hidden"
               onClick={() => setIsOpen(!isOpen)}
             >
               <FontAwesomeIcon icon={faBars} />
@@ -37,7 +39,9 @@ export default function Navbar() {
           {!loading && isAuthenticated && (
             <Link
               to="/profile"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
+              className={`block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 font-semibold hover:text-indigo-700 ${
+                location.pathname === '/profile' && 'text-indigo-500'
+              }`}
             >
               Profile
             </Link>
@@ -46,7 +50,9 @@ export default function Navbar() {
           {!loading && isAuthenticated && (
             <Link
               to="/account"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
+              className={`block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 font-semibold hover:text-indigo-700 ${
+                location.pathname === '/account' && 'text-indigo-500'
+              }`}
             >
               Account
             </Link>
@@ -54,7 +60,9 @@ export default function Navbar() {
 
           <Link
             to="/about"
-            className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 hover:text-gray-900"
+            className={`block mt-4 md:inline-block md:mt-0 md:ml-6 text-gray-600 font-semibold hover:text-indigo-700 ${
+              location.pathname === '/about' && 'text-indigo-500'
+            }`}
           >
             About
           </Link>
@@ -63,3 +71,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+// ${location.pathname === '/profile' && 'text-indigo-500'}

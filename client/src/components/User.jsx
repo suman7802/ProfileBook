@@ -55,7 +55,7 @@ export default function User({ user }) {
                 <p className="text-sm text-green-500 lowercase">&nbsp;{user.role}&nbsp;&nbsp;</p>
                 <p
                   onClick={() => setShow(!show)}
-                  className="text-sm text-blue-500 hover:cursor-pointer hover:underline"
+                  className="text-sm text-indigo-500 hover:cursor-pointer hover:underline"
                 >
                   more
                 </p>

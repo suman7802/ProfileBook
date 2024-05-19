@@ -34,7 +34,7 @@ export default function Profile() {
 
           <span
             onClick={togglePOPUP}
-            className="absolute hover:cursor-pointer text-sm text-white top-11 right-3 bg-blue-500 hover:bg-blue-700 px-2 rounded-[5vh]"
+            className="absolute hover:cursor-pointer text-sm text-white bottom-11 right-2 bg-indigo-500 hover:bg-indigo-700 px-2 rounded-[5vh]"
           >
             edit
           </span>
@@ -48,16 +48,16 @@ export default function Profile() {
 
         <div className="flex flex-col gap-3 items-center text-center md:w-[50%] lg:w-[30%]">
           {role === 'ADMIN' && (
-            <span className="text-sm text-white bottom-20 right-3 bg-blue-500 px-2 rounded-[5vh]">
+            <span className="text-sm text-white bottom-20 right-3 bg-indigo-500 px-2 rounded-[5vh]">
               Admin
             </span>
           )}
 
-          <span className="text-sm font-semibold text-gray-500">{email && email}</span>
-          <span className="text-3xl font-semibold text-gray-500">
+          <span className="text-sm font-semibold text-gray-700">{email && email}</span>
+          <span className="text-3xl font-semibold text-gray-700">
             {fullName ? fullName : 'Guest'}
           </span>
-          <span className="text-xl font-semibold text-gray-500">{bio !== 'null' ? bio : ''}</span>
+          <span className="text-xl font-semibold text-gray-700">{bio !== 'null' ? bio : ''}</span>
         </div>
       </div>
     </div>
