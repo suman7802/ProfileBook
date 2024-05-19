@@ -4,10 +4,10 @@ import Navbar from './components/Navbar';
 import { AuthProvider } from './context/auth.context';
 import { ProfileProvider } from './context/profile.context';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Profile from './components/Profile';
 import About from './pages/About';
 import Account from './pages/Account';
 import Status from './components/Status';
+import UserProfile from './pages/UserProfile';
 
 export default function App() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
             <div className="pt-16">
               <Routes>
                 <Route path="/*" index element={<Home />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<UserProfile />} />
                 <Route path="/account" element={<Account />} />
                 <Route path="/auth/*" element={<Auth />} />
                 <Route path="/about" element={<About />} />
