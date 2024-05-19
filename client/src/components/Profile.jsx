@@ -17,7 +17,13 @@ export default function Profile() {
 
   return (
     <div className="relative">
-      {isEditing && <UpdateProfile fullName={fullName} bio={bio} togglePOPUP={togglePOPUP} />}
+      {isEditing && (
+        <UpdateProfile
+          fullName={fullName !== 'null' ? fullName : ''}
+          bio={bio !== 'null' ? bio : ''}
+          togglePOPUP={togglePOPUP}
+        />
+      )}
       <div className="flex flex-col w-screen items-center py-10 gap-10">
         <div className="relative flex flex-col items-center gap-4">
           <img
@@ -50,7 +56,7 @@ export default function Profile() {
             <span className="text-3xl font-semibold text-gray-500">
               {fullName ? fullName : 'Guest'}
             </span>
-            <span className="text-xl font-semibold text-gray-500">{bio ? bio : ''}</span>
+            <span className="text-xl font-semibold text-gray-500">{bio !== 'null' ? bio : ''}</span>
           </div>
         </div>
       </div>
