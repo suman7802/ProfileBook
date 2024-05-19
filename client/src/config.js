@@ -4,7 +4,7 @@
  *
  * */
 
-const url = '/api';
+// const url = '/api';
 
 /*
  *
@@ -12,7 +12,7 @@ const url = '/api';
  *
  * */
 
-// const url = 'http://localhost:8000/api';
+const url = 'http://localhost:8000/api';
 
 /*
  *

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { createContext, useReducer, useEffect } from 'react';
 
 import { url } from '../config';
-import { AuthContext } from '../context/auth.context';
+import { AuthContext } from './auth.context';
 
 const ProfileContext = createContext();
 

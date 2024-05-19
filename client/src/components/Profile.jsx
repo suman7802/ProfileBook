@@ -24,8 +24,8 @@ export default function Profile() {
           togglePOPUP={togglePOPUP}
         />
       )}
-      <div className="flex flex-col w-screen items-center py-10 gap-10">
-        <div className="relative flex flex-col items-center gap-4">
+      <div className="flex flex-col w-screen items-center py-10 gap-4">
+        <div className="relative">
           <img
             src={profile ? profile : Avatar}
             alt="profile"
@@ -34,30 +34,30 @@ export default function Profile() {
 
           <span
             onClick={togglePOPUP}
-            className="absolute hover:cursor-pointer text-sm text-white top-11 right-3 bg-blue-500 px-2 rounded-[5vh]"
+            className="absolute hover:cursor-pointer text-sm text-white top-11 right-3 bg-blue-500 hover:bg-blue-700 px-2 rounded-[5vh]"
           >
             edit
           </span>
+        </div>
 
-          {loading && (
-            <div className="absolute top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              Loading..
-            </div>
+        {loading && (
+          <div className="absolute top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            Loading..
+          </div>
+        )}
+
+        <div className="flex flex-col gap-3 items-center text-center md:w-[50%] lg:w-[30%]">
+          {role === 'ADMIN' && (
+            <span className="text-sm text-white bottom-20 right-3 bg-blue-500 px-2 rounded-[5vh]">
+              Admin
+            </span>
           )}
 
-          <div className="flex flex-col gap-3 items-center">
-            {role === 'ADMIN' && (
-              <span className="text-sm text-white bottom-20 right-3 bg-blue-500 px-2 rounded-[5vh]">
-                Admin
-              </span>
-            )}
-
-            <span className="text-sm font-semibold text-gray-500">{email && email}</span>
-            <span className="text-3xl font-semibold text-gray-500">
-              {fullName ? fullName : 'Guest'}
-            </span>
-            <span className="text-xl font-semibold text-gray-500">{bio !== 'null' ? bio : ''}</span>
-          </div>
+          <span className="text-sm font-semibold text-gray-500">{email && email}</span>
+          <span className="text-3xl font-semibold text-gray-500">
+            {fullName ? fullName : 'Guest'}
+          </span>
+          <span className="text-xl font-semibold text-gray-500">{bio !== 'null' ? bio : ''}</span>
         </div>
       </div>
     </div>

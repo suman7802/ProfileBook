@@ -6,7 +6,6 @@ import { createContext, useReducer, useEffect } from 'react';
 import { ProfileContext } from '../context/profile.context';
 
 import { url } from '../config';
-import { get } from 'react-hook-form';
 
 const UsersContext = createContext();
 

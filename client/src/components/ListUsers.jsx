@@ -17,17 +17,13 @@ export default function ListUsers() {
         <User key={user.id} user={user} />
       ))}
 
-      {loading && <p>Loading...</p>}
-
-      {!loading && (
-        <button
-          type="button"
-          onClick={loadMoreUsers}
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-5"
-        >
-          Load more
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={loadMoreUsers}
+        className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-5 w-40 hover:bg-blue-700"
+      >
+        {loading ? 'Loading..' : 'Load more'}
+      </button>
     </div>
   );
 }
