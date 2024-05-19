@@ -14,7 +14,7 @@ To install the project, follow these steps:
 git clone
 ```
 
-2. Create .env files using .env.sample
+2. Create .env files using .env.sample & edit config file in client dir
 
 3. Run the Project
 
