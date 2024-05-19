@@ -29,7 +29,7 @@ export default function Profile() {
           <img
             src={profile ? profile : Avatar}
             alt="profile"
-            className="w-64 h-64 object-cover rounded-full"
+            className="w-64 h-64 object-cover rounded-full border-4 border-indigo-500"
           />
 
           <span
