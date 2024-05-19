@@ -9,7 +9,6 @@ export default function ListUsers() {
 
   const { users, loading, loadMoreUsers } = context;
 
-  console.log(users);
   return (
     <div className="w-screen flex flex-col items-center px-10">
       <hr className="border w-full" />

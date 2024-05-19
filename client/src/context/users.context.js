@@ -53,8 +53,6 @@ function UsersProvider({ children }) {
         try {
           const response = await api.get(`/profiles/${index}`);
 
-          console.log(response.data.users);
-
           if (response?.status === 200) {
             dispatch({ type: 'SET_USERS', payload: response.data.users });
           }
@@ -70,10 +68,26 @@ function UsersProvider({ children }) {
     }
   }, [role, index]);
 
+  const deleteUser = async (id) => {
+    try {
+      const response = await api.delete(`/profile/delete/${id}`);
+
+      if (response?.status === 204) {
+        toast.success(response.data.message);
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data.message);
+    }
+  };
+
   const loadMoreUsers = () => setIndex((prevIndex) => prevIndex + 5);
 
   return (
-    <UsersContext.Provider value={{ ...state, loadMoreUsers }}>{children}</UsersContext.Provider>
+    <UsersContext.Provider value={{ ...state, deleteUser, loadMoreUsers }}>
+      {children}
+    </UsersContext.Provider>
   );
 }
 
