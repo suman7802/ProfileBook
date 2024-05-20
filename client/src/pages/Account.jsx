@@ -38,7 +38,7 @@ export default function Account() {
   return (
     <div className="min-h-screen w-screen flex flex-col gap-5 items-center p-20 ">
       <button
-        className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 text-white rounded-md"
+        className="bg-indigo-600 min-w-48 hover:bg-indigo-700 px-8 py-3 text-white rounded-md"
         onClick={handleLogout}
       >
         Log out&nbsp;
@@ -46,7 +46,7 @@ export default function Account() {
       </button>
 
       <button
-        className="bg-red-500 hover:bg-red-600 px-8 py-3 text-white rounded-md"
+        className="bg-red-500 min-w-48 hover:bg-red-600 px-8 py-3 text-white rounded-md"
         onClick={handleDelete}
       >
         Account Delete{loading && 'ing..'}&nbsp;

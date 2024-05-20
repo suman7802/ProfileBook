@@ -38,7 +38,7 @@ export default function User({ user }) {
         />
       )}
 
-      <div className="user flex flex-col items-center  bg-[#ececece0] my-1 px-2 sm:px-5 py-3 rounded-md w-full md:w-[50vw] lg:w-[35vw] xl:w-[25vw] 2xl:w-[15vw]">
+      <div className="user flex flex-col items-center  bg-[#ececece0] my-1 px-2 sm:px-5 py-3 rounded-md min-w-72 w-full">
         <div className="flex flex-row justify-between items-center w-full">
           <img
             src={user.profile}
@@ -46,7 +46,7 @@ export default function User({ user }) {
             className="w-16 h-16 object-cover rounded-full border-2 border-indigo-500"
           />
 
-          <div className="textInfo flex flex-row justify-between w-[calc(100%-8rem)]">
+          <div className="textInfo flex flex-row justify-between w-[calc(100%-6rem)]">
             <div className="info">
               <h2>{user.fullName}</h2>
               <p className="text-sm">{user.email}</p>
