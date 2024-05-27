@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import express, { Application } from 'express';
+import ratelimitter from 'express-rate-limit';
 
 import prisma from './models/db.model';
 import userRoute from './routes/user.routes';
@@ -14,6 +15,11 @@ import { NODE_ENV, PORT, ALLOW_ORIGIN } from './config/keys';
 let dbStatus = { connected: false };
 const app: Application = express();
 const isLocal = NODE_ENV === 'development';
+
+const limiter = ratelimitter({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
+});
 
 const corsOptions = {
   origin: isLocal ? ALLOW_ORIGIN : undefined,
@@ -28,6 +34,8 @@ app.use(
     },
   })
 );
+
+app.use(limiter);
 
 app.use(cors(corsOptions));
 app.use(morgan(isLocal == true ? 'dev' : 'tiny'));
