@@ -9,7 +9,7 @@ export default async function generateOTP() {
     lowerCaseAlphabets: true,
   });
 
-  console.log('otp:', OTP);
+  console.log('OTP:', OTP);
 
   const hashedOTP = await bcrypt.hash(OTP, 10);
   return { OTP, hashedOTP };
