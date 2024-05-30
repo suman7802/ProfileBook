@@ -53,15 +53,15 @@ app.get('*', (req, res) =>
 
 app.use(errorHandler);
 
-prisma
-  .$connect()
-  .then(() => {
-    console.log('\nDatabase is connected');
-    dbStatus.connected = true;
-    app.listen(PORT, () => {
-      console.log(`\nctrl + click http://localhost:${PORT}\nctrl + c to stop server`);
-    });
-  })
-  .catch((error) => console.error('Error connecting to the database:', error));
+async function connectToDatabase() {
+  prisma
+    .$connect()
+    .then(() => {
+      console.log('\nDatabase is connected');
+      dbStatus.connected = true;
+    })
+    .catch((error) => console.error('Error connecting to the database:', error));
+}
 
 export default dbStatus;
+export { app, PORT, connectToDatabase };
