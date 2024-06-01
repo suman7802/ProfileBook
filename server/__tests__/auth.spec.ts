@@ -1,6 +1,7 @@
 import request from 'supertest';
 import { app } from '../src/index';
 import { Role } from '@prisma/client';
+import { sharedState } from './sharedState';
 
 describe('authController', () => {
   describe('signup', () => {
@@ -20,6 +21,8 @@ describe('authController', () => {
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('user');
         expect(res.body).toHaveProperty('message', 'User created successfully');
+
+        ({ otp: sharedState.otp, email: sharedState.email } = res.body.user);
       },
       1000 * 30
     );
@@ -55,6 +58,55 @@ describe('authController', () => {
       });
 
       expect(res.statusCode).toEqual(400);
+    });
+  });
+
+  describe('verify', () => {
+    it('should require email and otp', async () => {
+      const res = await request(app).put('/api/auth/verify');
+
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toHaveProperty('message', 'email and otp required');
+    });
+
+    it('should handle non-existing user', async () => {
+      const res = await request(app).put('/api/auth/verify').send({
+        otp: '123456',
+        email: 'non-existing@example.com',
+      });
+
+      expect(res.statusCode).toEqual(404);
+      expect(res.body).toHaveProperty('message', 'User Not Found');
+    });
+
+    it('should handle invalid OTP', async () => {
+      const res = await request(app).put('/api/auth/verify').send({
+        otp: 'invalid-otp',
+        email: sharedState.email,
+      });
+
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toHaveProperty('message', 'invalid OTP');
+    });
+
+    it('should verify a user', async () => {
+      const res = await request(app).put('/api/auth/verify').send({
+        otp: sharedState.otp,
+        email: sharedState.email,
+      });
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('message', 'User verified successfully');
+    });
+
+    it('should handle already verified user', async () => {
+      const res = await request(app).put('/api/auth/verify').send({
+        otp: sharedState.otp,
+        email: sharedState.email,
+      });
+
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toHaveProperty('message', 'User already verified');
     });
   });
 });

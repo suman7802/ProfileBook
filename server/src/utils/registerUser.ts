@@ -1,11 +1,19 @@
 import bcrypt from 'bcryptjs';
+import { fork } from 'child_process';
 import generateOTP from './generateOTP';
+import { NODE_ENV } from '../config/keys';
 import { verifiedUser } from './verifiedUser';
 import CustomError from '../errors/customError';
 import { PrismaClient, Role } from '@prisma/client';
-import { fork } from 'child_process';
 
 const prisma = new PrismaClient();
+
+type ReturnObjectType = {
+  otp?: string;
+  email: string;
+  OTPExpire: Date;
+  otpMessage: unknown;
+};
 
 export default async function registerUser(
   email: string,
@@ -42,9 +50,14 @@ export default async function registerUser(
   });
   const otpMessage = await otpSendStatus;
 
-  return {
+  const returnObject: ReturnObjectType = {
+    otp: OTP,
     otpMessage,
     email: newUser.email,
     OTPExpire: newUser.otpExpiry,
   };
+
+  if (NODE_ENV === 'test') returnObject.otp = OTP;
+
+  return returnObject;
 }
