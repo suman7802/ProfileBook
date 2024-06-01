@@ -61,6 +61,18 @@ describe('authController', () => {
     });
   });
 
+  describe('unverified login', () => {
+    it('should not allow login if user is not verified', async () => {
+      const res = await request(app).post('/api/auth/login').send({
+        email: sharedState.email,
+        password: 'HardPassword7802',
+      });
+
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toHaveProperty('message', 'Please verify your account first');
+    });
+  });
+
   describe('verify', () => {
     it('should require email and otp', async () => {
       const res = await request(app).put('/api/auth/verify');
@@ -107,6 +119,47 @@ describe('authController', () => {
 
       expect(res.statusCode).toEqual(400);
       expect(res.body).toHaveProperty('message', 'User already verified');
+    });
+  });
+
+  describe('login', () => {
+    it('should require email and password', async () => {
+      const res = await request(app).post('/api/auth/login');
+
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toHaveProperty('message', 'email and password required');
+    });
+
+    it('should handle non-existing user', async () => {
+      const res = await request(app).post('/api/auth/login').send({
+        email: 'non-existing@example.com',
+        password: 'password',
+      });
+
+      expect(res.statusCode).toEqual(404);
+      expect(res.body).toHaveProperty('message', 'User Not Found');
+    });
+
+    it('should handle invalid password', async () => {
+      const res = await request(app).post('/api/auth/login').send({
+        email: sharedState.email,
+        password: 'invalid-password',
+      });
+
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toHaveProperty('message', 'invalid Password');
+    });
+
+    it('should login a user', async () => {
+      const res = await request(app).post('/api/auth/login').send({
+        email: sharedState.email,
+        password: 'HardPassword7802',
+      });
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('message', 'User logged in successfully');
+      expect(res.body).toHaveProperty('token');
+      expect(res.body).toHaveProperty('user');
     });
   });
 });
