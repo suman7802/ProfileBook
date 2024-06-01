@@ -6,6 +6,7 @@
   },
   "scripts": {
     "test": "jest",
+    "build":"tsc",
     "dev": "tsc && concurrently \"npx tsc --watch\" \"nodemon dist/src/server.js\"",
     "start": "tsc && node dist/src/server.js",
     "live": "node dist/src/server.js"
