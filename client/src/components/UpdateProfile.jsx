@@ -6,7 +6,8 @@ import { ProfileContext } from '../context/profile.context';
 export default function UpdateProfile({ fullName, bio, togglePOPUP }) {
   const context = useContext(ProfileContext);
 
-  if (context === undefined) throw new Error('useProfile must be used within a ProfileProvider');
+  if (context === undefined)
+    throw new Error('useProfile must be used within a ProfileProvider');
 
   const { loading, updateProfile } = context;
   const [updatedBio, setUpdatedBio] = useState(bio);
@@ -25,7 +26,7 @@ export default function UpdateProfile({ fullName, bio, togglePOPUP }) {
   };
 
   return (
-    <div className="absolute w-80 top-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-[#e4e7ebe4] border border-gray-300 rounded-md">
+    <div className="absolute left-1/2 top-80 z-10 w-80 -translate-x-1/2 -translate-y-1/2 transform rounded-md border border-gray-300 bg-[#e4e7ebe4]">
       <form
         encType="multipart/form-data"
         onSubmit={handleSubmit}
@@ -36,7 +37,7 @@ export default function UpdateProfile({ fullName, bio, togglePOPUP }) {
           value={updatedFullName}
           placeholder="Full Name"
           onChange={(event) => setUpdatedFullName(event.target.value)}
-          className="bg-transparent border border-gray-400 rounded-md px-2 outline-none"
+          className="rounded-md border border-gray-400 bg-transparent px-2 outline-none"
         />
 
         {/* bio field */}
@@ -46,7 +47,7 @@ export default function UpdateProfile({ fullName, bio, togglePOPUP }) {
           placeholder="Bio"
           value={updatedBio}
           onChange={(event) => setUpdatedBio(event.target.value)}
-          className="bg-transparent border border-gray-400 rounded-md px-2 outline-none"
+          className="rounded-md border border-gray-400 bg-transparent px-2 outline-none"
         />
 
         {/* profile field */}
@@ -57,16 +58,22 @@ export default function UpdateProfile({ fullName, bio, togglePOPUP }) {
           accept="image/*"
           capture="camera"
           onChange={(event) => setUpdatedProfile(event.target.files[0])}
-          className="bg-transparent rounded-md px-1 outline-none"
+          className="rounded-md bg-transparent px-1 outline-none"
         />
 
         {/* action buttons */}
         <div className="flex flex-col gap-3">
           <button
             type="submit"
-            disabled={updatedFullName === fullName && updatedBio === bio && !updatedProfile}
-            className={`rounded-md text-white py-1 hover:bg-indigo-600 ${
-              updatedFullName === fullName && updatedBio === bio && !updatedProfile
+            disabled={
+              updatedFullName === fullName &&
+              updatedBio === bio &&
+              !updatedProfile
+            }
+            className={`rounded-md py-1 text-white hover:bg-indigo-600 ${
+              updatedFullName === fullName &&
+              updatedBio === bio &&
+              !updatedProfile
                 ? 'bg-indigo-300'
                 : 'bg-indigo-500'
             }`}
@@ -76,7 +83,7 @@ export default function UpdateProfile({ fullName, bio, togglePOPUP }) {
 
           <button
             type="button"
-            className="bg-indigo-500 rounded-md text-white py-1 hover:bg-indigo-600"
+            className="rounded-md bg-indigo-500 py-1 text-white hover:bg-indigo-600"
             onClick={togglePOPUP}
           >
             Cancel

@@ -34,14 +34,15 @@ const formSchema = z.object({
       },
       {
         message: 'Please provide admin password',
-      }
+      },
     ),
 });
 
 export default function SignUp() {
   const context = useContext(AuthContext);
 
-  if (context === undefined) throw new Error('useAuth must be used within a AuthProvider');
+  if (context === undefined)
+    throw new Error('useAuth must be used within a AuthProvider');
 
   const { loading, signUp } = context;
 
@@ -51,30 +52,39 @@ export default function SignUp() {
   const togglePasswordVisibility = () => setShowPassword((show) => !show);
 
   const [showAdminPassword, setShowAdminPassword] = useState(false);
-  const toggleAdminPasswordVisibility = () => setShowAdminPassword((show) => !show);
+  const toggleAdminPasswordVisibility = () =>
+    setShowAdminPassword((show) => !show);
 
   function onSubmit(values) {
-    signUp(values.email, values.password, values.fullName, values.role, values.adminPassword);
+    signUp(
+      values.email,
+      values.password,
+      values.fullName,
+      values.role,
+      values.adminPassword,
+    );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col bg-gray-200 rounded-lg p-10 gap-5"
+        className="flex flex-col gap-5 rounded-lg bg-gray-200 p-10"
       >
         <h2 className="text-2xl font-bold text-indigo-600">Sign Up</h2>
 
         <div className="flex flex-col gap-3 text-gray-500">
           <label>
-            <span className="ml-1 mb-3">Full Name</span>
+            <span className="mb-3 ml-1">Full Name</span>
             <input
               {...form.register('fullName')}
-              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+              className="mt-2 w-full rounded-md px-2 py-2 focus:outline-none"
               placeholder="John Doe"
             />
             {form.formState.errors.fullName && (
-              <p className="text-red-500">{form.formState.errors.fullName.message}</p>
+              <p className="text-red-500">
+                {form.formState.errors.fullName.message}
+              </p>
             )}
           </label>
 
@@ -82,11 +92,13 @@ export default function SignUp() {
             <span className="ml-1">Email</span>
             <input
               {...form.register('email')}
-              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+              className="mt-2 w-full rounded-md px-2 py-2 focus:outline-none"
               placeholder="john.doe@example.com"
             />
             {form.formState.errors.email && (
-              <p className="text-red-500">{form.formState.errors.email.message}</p>
+              <p className="text-red-500">
+                {form.formState.errors.email.message}
+              </p>
             )}
           </label>
 
@@ -96,7 +108,7 @@ export default function SignUp() {
               <input
                 {...form.register('password')}
                 type={showPassword ? 'text' : 'password'}
-                className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+                className="mt-2 w-full rounded-md px-2 py-2 focus:outline-none"
                 placeholder="********"
               />
 
@@ -114,7 +126,9 @@ export default function SignUp() {
             </div>
 
             {form.formState.errors.password && (
-              <p className="text-red-500">{form.formState.errors.password.message}</p>
+              <p className="text-red-500">
+                {form.formState.errors.password.message}
+              </p>
             )}
           </label>
 
@@ -124,7 +138,7 @@ export default function SignUp() {
               {...form.register('role')}
               onChange={(e) => form.setValue('role', e.target.value)}
               value={form.watch('role')}
-              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+              className="mt-2 w-full rounded-md px-2 py-2 focus:outline-none"
             >
               <option value="USER">User</option>
               <option value="ADMIN">Admin</option>
@@ -138,7 +152,7 @@ export default function SignUp() {
                 <input
                   {...form.register('adminPassword')}
                   type={showAdminPassword ? 'text' : 'password'}
-                  className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+                  className="mt-2 w-full rounded-md px-2 py-2 focus:outline-none"
                   placeholder="********"
                 />
 
@@ -155,18 +169,23 @@ export default function SignUp() {
                 </button>
               </div>
               {form.formState.errors.adminPassword && (
-                <p className="text-red-500">{form.formState.errors.adminPassword.message}</p>
+                <p className="text-red-500">
+                  {form.formState.errors.adminPassword.message}
+                </p>
               )}
             </label>
           )}
         </div>
         <button
           type="submit"
-          className="w-full py-2 px-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+          className="w-full rounded-md border border-transparent bg-indigo-600 px-2 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
         >
           Submit{loading && 'ting...'}
         </button>
-        <Link to="/auth/login" className="text-indigo-600 text-sm pl-1 hover:underline">
+        <Link
+          to="/auth/login"
+          className="pl-1 text-sm text-indigo-600 hover:underline"
+        >
           Already have an account? Login
         </Link>
       </form>

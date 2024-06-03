@@ -55,7 +55,11 @@ function StatusProvider({ children }) {
     getProfile();
   }, []);
 
-  return <StatusContext.Provider value={{ ...state }}>{children}</StatusContext.Provider>;
+  return (
+    <StatusContext.Provider value={{ ...state }}>
+      {children}
+    </StatusContext.Provider>
+  );
 }
 
 StatusProvider.propTypes = {

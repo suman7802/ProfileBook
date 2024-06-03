@@ -21,7 +21,8 @@ const formSchema = z.object({
 export default function Login() {
   const context = useContext(AuthContext);
 
-  if (context === undefined) throw new Error('useAuth must be used within a AuthProvider');
+  if (context === undefined)
+    throw new Error('useAuth must be used within a AuthProvider');
 
   const { loading, logIn, email } = context;
 
@@ -38,10 +39,10 @@ export default function Login() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col bg-gray-200 rounded-lg p-10 gap-5"
+        className="flex flex-col gap-5 rounded-lg bg-gray-200 p-10"
       >
         <h2 className="text-2xl font-bold text-indigo-600">Login</h2>
 
@@ -50,11 +51,13 @@ export default function Login() {
             <span className="ml-1">Email</span>
             <input
               {...form.register('email')}
-              className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+              className="mt-2 w-full rounded-md px-2 py-2 focus:outline-none"
               placeholder="john.doe@example.com"
             />
             {form.formState.errors.email && (
-              <p className="text-red-500">{form.formState.errors.email.message}</p>
+              <p className="text-red-500">
+                {form.formState.errors.email.message}
+              </p>
             )}
           </label>
 
@@ -65,7 +68,7 @@ export default function Login() {
               <input
                 {...form.register('password')}
                 type={showPassword ? 'text' : 'password'}
-                className="w-full rounded-md px-2 py-2 mt-2 focus:outline-none"
+                className="mt-2 w-full rounded-md px-2 py-2 focus:outline-none"
                 placeholder="********"
               />
 
@@ -83,17 +86,24 @@ export default function Login() {
             </div>
 
             {form.formState.errors.password && (
-              <p className="text-red-500">{form.formState.errors.password.message}</p>
+              <p className="text-red-500">
+                {form.formState.errors.password.message}
+              </p>
             )}
           </label>
         </div>
         <button
           type="submit"
-          className="w-full py-2 px-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+          className="w-full rounded-md border border-transparent bg-indigo-600 px-2 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
         >
           Login{loading && 'ing'}
         </button>
-        <Link to="/auth/signup" className='text-indigo-600 text-sm pl-1 hover:underline'>Don't have an account? Sign Up</Link>
+        <Link
+          to="/auth/signup"
+          className="pl-1 text-sm text-indigo-600 hover:underline"
+        >
+          Don't have an account? Sign Up
+        </Link>
       </form>
     </div>
   );

@@ -5,7 +5,8 @@ import { StatusContext } from '../context/status.context';
 export default function Status() {
   const context = useContext(StatusContext);
 
-  if (context === undefined) throw new Error('useStatus must be used within a StatusProvider');
+  if (context === undefined)
+    throw new Error('useStatus must be used within a StatusProvider');
 
   const { loading, isConnected } = context;
 
@@ -13,11 +14,11 @@ export default function Status() {
     <>
       {!isConnected && (
         <div className="fixed inset-0 flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-[#f0f0f0] shadow-lg p-10">
+          <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-[#f0f0f0] p-10 shadow-lg">
             {loading && (
               <>
                 <svg
-                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-red-500"
+                  className="-ml-1 mr-3 h-5 w-5 animate-spin text-red-500"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

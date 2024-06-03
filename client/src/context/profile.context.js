@@ -53,7 +53,8 @@ function ProfileProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const authContext = useContext(AuthContext);
 
-  if (authContext === undefined) throw new Error('useAuth must be used within a AuthProvider');
+  if (authContext === undefined)
+    throw new Error('useAuth must be used within a AuthProvider');
 
   const { logout } = authContext;
 

@@ -43,7 +43,8 @@ function UsersProvider({ children }) {
 
   const context = useContext(ProfileContext);
 
-  if (context === undefined) throw new Error('useProfile must be used within a ProfileProvider');
+  if (context === undefined)
+    throw new Error('useProfile must be used within a ProfileProvider');
   const { role } = context;
 
   useEffect(() => {

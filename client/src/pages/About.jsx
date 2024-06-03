@@ -34,16 +34,22 @@ const socialButtons = [
 
 export default function About() {
   return (
-    <div className="p-5 flex flex-col gap-8 min-h-[90vh] items-center justify-center py-5">
+    <div className="flex min-h-[90vh] flex-col items-center justify-center gap-8 p-5 py-5">
       <img src={aboutAnimation} alt="contact" className="md:w-[30vw]" />
-      <div className="aboutMe text-2xl flex flex-col px-5 md:w-[50%] items-center text-center">
+      <div className="aboutMe flex flex-col items-center px-5 text-center text-2xl md:w-[50%]">
         <span>
           Hi, I am&nbsp;
           <span className="font-semibold">Suman Sharma</span>.
         </span>
         <span>
-          A<span className="font-semibold text-indigo-500">&nbsp;web developer&nbsp;</span>&
-          <span className="font-semibold text-indigo-500">&nbsp;CS student&nbsp;</span>
+          A
+          <span className="font-semibold text-indigo-500">
+            &nbsp;web developer&nbsp;
+          </span>
+          &
+          <span className="font-semibold text-indigo-500">
+            &nbsp;CS student&nbsp;
+          </span>
         </span>
         <span>
           at&nbsp;
